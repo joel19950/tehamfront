@@ -17,9 +17,16 @@ export class AppComponent {
 
   greetings: string[] = [];
   disabled = true;
-  name: string='';
-  private stompClient:any = null;
 
+  private stompClient:any = null;
+  name: string='';
+  name1:string='';
+  name2:string='';
+  vueGet:number=1;
+
+greetingName:string='';
+   //stockage de la vue dans la session du navigateur
+ // vuGet = localStorage.getItem('vue');
   constructor() { }
 
   setConnected(connected: boolean) {
@@ -39,10 +46,15 @@ export class AppComponent {
       _this.setConnected(true);
       console.log('Connected: ' + frame);
 
-      _this.stompClient.subscribe('/topic/hi', function (hello:any) {
+      _this.stompClient.subscribe('/topic/hi', function(hello:any) {
+
         _this.showGreeting(JSON.parse(hello.body).greeting);
+        
+        _this.greetingName=JSON.parse(hello.body).greeting;
       });
     });
+
+    
   }
 
   disconnect() {
@@ -54,15 +66,51 @@ export class AppComponent {
     console.log('Disconnected!');
   }
 
-  sendName() {
-    this.stompClient.send(
-      '/gkz/hello',
-      {},
-      JSON.stringify({ 'name': this.name })
-    );
+  sendName(num:number) {
+    this.greetingName='';
+    
+    if(this.name!=''){
+      this.stompClient.send(
+        '/gkz/hello',
+        {},
+        JSON.stringify({ 'name': this.name})
+      );
+  localStorage.removeItem('vue');
+  localStorage.setItem('vue', JSON.stringify(num))
+  
+    }else if(this.name1!=''){
+      this.stompClient.send(
+        '/gkz/hello',
+        {},
+        JSON.stringify({ 'name': this.name1})
+      );
+  localStorage.removeItem('vue');
+  localStorage.setItem('vue',JSON.stringify(num))
+  
+  
+    }else if(this.name2!=''){
+      this.stompClient.send(
+        '/gkz/hello',
+        {},
+        JSON.stringify({ 'name': this.name2})
+      );
+      localStorage.removeItem('vue');
+      localStorage.setItem('vue',JSON.stringify(num))
+  
+    }
+
+this.vueGet=num;
+
   }
+
 
   showGreeting(message:any) {
     this.greetings.push(message);
   }
+
+
+
+
+
+
 }
