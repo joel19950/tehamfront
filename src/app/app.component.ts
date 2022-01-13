@@ -110,13 +110,11 @@ sendName(num:number) {
     
     if(this.vueGet==1){
       this.router.navigateByUrl('/vue1')
-    }else if(this.vueGet==2){
+    } if(this.vueGet==2){
       this.router.navigateByUrl('/vue2')
-    }else if(this.vueGet==3){
+    } if(this.vueGet==3){
       this.router.navigateByUrl('/vue3')
-    }else{
-      this.router.navigateByUrl('/vue1')
-    }    
+    }   
 
   }
 
