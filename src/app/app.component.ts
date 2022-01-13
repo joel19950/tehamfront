@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 //import * as SockJS from 'sockjs-client';
 import * as SockJS from 'sockjs-client';
 import {Stomp} from '@stomp/stompjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -22,12 +23,12 @@ export class AppComponent {
   name: string='';
   name1:string='';
   name2:string='';
-  vueGet:number=1;
+  vueGet:any=1;
 
-greetingName:string='';
+greetingName:any='';
    //stockage de la vue dans la session du navigateur
  // vuGet = localStorage.getItem('vue');
-  constructor() { }
+  constructor( public router:Router) { }
 
   setConnected(connected: boolean) {
     this.disabled = !connected;
@@ -50,7 +51,8 @@ greetingName:string='';
 
         _this.showGreeting(JSON.parse(hello.body).greeting);
         
-        _this.greetingName=JSON.parse(hello.body).greeting;
+               
+      
       });
     });
 
@@ -66,17 +68,18 @@ greetingName:string='';
     console.log('Disconnected!');
   }
 
-  sendName(num:number) {
-    this.greetingName='';
-    
-    if(this.name!=''){
+sendName(num:number) { 
+  if(this.name!=''){
       this.stompClient.send(
         '/gkz/hello',
         {},
-        JSON.stringify({ 'name': this.name})
+  JSON.stringify({ 'name': this.name})
       );
   localStorage.removeItem('vue');
   localStorage.setItem('vue', JSON.stringify(num))
+  localStorage.setItem('name',this.name);
+  this.name='';
+  
   
     }else if(this.name1!=''){
       this.stompClient.send(
@@ -86,8 +89,9 @@ greetingName:string='';
       );
   localStorage.removeItem('vue');
   localStorage.setItem('vue',JSON.stringify(num))
-  
-  
+  localStorage.setItem('name',this.name1);
+  this.name1='';
+
     }else if(this.name2!=''){
       this.stompClient.send(
         '/gkz/hello',
@@ -96,12 +100,26 @@ greetingName:string='';
       );
       localStorage.removeItem('vue');
       localStorage.setItem('vue',JSON.stringify(num))
-  
+      localStorage.setItem('name', this.name2);
+      this.name2='';
     }
-
-this.vueGet=num;
+    this.vueGet = localStorage.getItem('vue');
+    this.greetingName=localStorage.getItem('name');
+    console.log(this.greetingName)
+    console.log(this.vueGet);
+    
+    if(this.vueGet==1){
+      this.router.navigateByUrl('/vue1')
+    }else if(this.vueGet==2){
+      this.router.navigateByUrl('/vue2')
+    }else if(this.vueGet==3){
+      this.router.navigateByUrl('/vue3')
+    }else{
+      this.router.navigateByUrl('/vue1')
+    }    
 
   }
+
 
 
   showGreeting(message:any) {
