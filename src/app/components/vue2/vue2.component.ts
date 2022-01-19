@@ -19,8 +19,9 @@ export class Vue2Component implements OnInit {
   constructor(public router:Router) { }
 
   ngOnInit(): void {
+  
     this.connect();
-    this.greetingName=localStorage.getItem('name');
+    this.greetingName = localStorage.getItem('name');
   }
 
   setConnected(connected: boolean){
@@ -41,20 +42,18 @@ export class Vue2Component implements OnInit {
       console.log('Connected: ' + frame);
 
       _this.stompClient.subscribe('/topic/hi', function(hello:any) {
-           localStorage.setItem('name',JSON.parse(hello.body).greeting);
           console.log('Connected: ' + JSON.parse(hello.body).greeting);
           _this.showGreeting(JSON.parse(hello.body).greeting);
         
-               
+          
       
       });
 
       _this.stompClient.subscribe('/topic/h3', function(hello:any) {
-        localStorage.setItem('name',JSON.parse(hello.body).greeting);
         console.log('Connected: ' + JSON.parse(hello.body).greeting);
-        _this.showGreeting(JSON.parse(hello.body).greeting);
+          _this.showGreeting(JSON.parse(hello.body).greeting);
       
-             
+         
     
     });
     });
@@ -95,7 +94,7 @@ export class Vue2Component implements OnInit {
       }
 
       showGreeting(namevue: any){
-        localStorage.setItem('namvue',namevue);
+        localStorage.setItem('name',namevue);
       }
   
 }

@@ -18,6 +18,7 @@ export class Vue1Component implements OnInit {
   constructor( private router: Router) { }
 
   ngOnInit(): void{
+    
     this.connect();
     this.greetingName=localStorage.getItem('name');
   }
@@ -41,18 +42,18 @@ export class Vue1Component implements OnInit {
       console.log('Connected: ' + frame);
 
       _this.stompClient.subscribe('/topic/h3', function(hello:any) {
-        localStorage.setItem('name',JSON.parse(hello.body).greeting);
+         
           console.log('Connected: ' + JSON.parse(hello.body).greeting);
           _this.showGreeting(JSON.parse(hello.body).greeting);
-        
+         
                
       
       });
       _this.stompClient.subscribe('/topic/h2', function(hello:any) {
-        localStorage.setItem('name',JSON.parse(hello.body).greeting);
+       
         console.log('Connected: ' + JSON.parse(hello.body).greeting);
         _this.showGreeting(JSON.parse(hello.body).greeting);
-      
+     
              
     
     });
@@ -67,7 +68,7 @@ export class Vue1Component implements OnInit {
     }
 
     this.setConnected(false);
-    console.log('Disconnected!');
+    console.log('Disconne cted!');
   }
 
   sendName2(num:number) { 
@@ -94,7 +95,7 @@ export class Vue1Component implements OnInit {
       }
 
   showGreeting(namevue: any){
-      localStorage.setItem('namvue', namevue);
+      localStorage.setItem('name', namevue);
 
     }
 
