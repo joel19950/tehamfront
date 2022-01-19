@@ -23,7 +23,9 @@ export class Vue3Component implements OnInit {
   ngOnInit(): void {
    
     this.connect();
-   this.greetingName=localStorage.getItem('name');
+    setTimeout(()=>{                           //<<<---using ()=> syntax
+      this.greetingName=localStorage.getItem('name');
+ }, 2000);
   }
 
   setConnected(connected: boolean){
