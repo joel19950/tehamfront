@@ -1,4 +1,14 @@
-
+<div class="container">
+    <form class="form-inline"  style="margin-top: 20px;">
+        <div class="form-group">
+          <label for="name">User's Name 3 <b style="color: red;"> {{ greetingName }}</b> :</label>
+          <input type="text" id="name" name="name2" class="form-control" [(ngModel)]="name"/>
+        </div>
+        <button id="send" class="btn btn-default" type="button" [disabled]="disabled" (click)="sendName1(1)" >Send1</button>
+        <button id="send" class="btn btn-default" type="button" [disabled]="disabled" (click)="sendName2(2)" >Send2</button>
+      
+    </form>
+</div>
 
 
     

@@ -15,28 +15,23 @@ export class Vue3Component implements OnInit {
 
   private stompClient:any = null;
   name: string='';
-  name1:string='';
-  name2:string='';
-  vueGet:any=1;
+  nameVue:string='';
   greetingName:any='';
+
   constructor(public router:Router) { }
 
-  ngOnInit(): void{
-
-
-
+  ngOnInit(): void {
+    this.connect();
+    this.greetingName=localStorage.getItem('name');
   }
 
-
-
-  setConnected(connected: boolean) {
+  setConnected(connected: boolean){
     this.disabled = !connected;
 
     if (connected) {
    //   this.greetings = [];
     }
   }
-
   connect() {
     const socket = new SockJS('http://localhost:8080/gkz-stomp-endpoint');
     this.stompClient = Stomp.over(socket);
@@ -47,12 +42,23 @@ export class Vue3Component implements OnInit {
       console.log('Connected: ' + frame);
 
       _this.stompClient.subscribe('/topic/hi', function(hello:any) {
-
-      //  _this.showGreeting(JSON.parse(hello.body).greeting);
+        
+          localStorage.setItem('name', JSON.parse(hello.body).greeting);
+          
+          console.log('Connected: ' + JSON.parse(hello.body).greeting);
+          _this.showGreeting(JSON.parse(hello.body).greeting);
         
                
       
       });
+      _this.stompClient.subscribe('/topic/h2', function(hello:any) {
+        localStorage.setItem('name',JSON.parse(hello.body).greeting);
+        console.log('Connected: ' + JSON.parse(hello.body).greeting);
+        _this.showGreeting(JSON.parse(hello.body).greeting);
+      
+             
+    
+    });
     });
 
     
@@ -70,67 +76,32 @@ export class Vue3Component implements OnInit {
 
 
 
-
-
-
-
-
-
-
-  sendName(num:number) { 
+  sendName1(num:number) { 
     if(this.name!=''){
         this.stompClient.send(
           '/gkz/hello',
           {},
     JSON.stringify({ 'name': this.name})
         );
-    localStorage.removeItem('vue');
-    localStorage.setItem('vue', JSON.stringify(num))
-    localStorage.setItem('name',this.name);
-    this.name='';
-    
-    
-      }else if(this.name1!=''){
-        this.stompClient.send(
-          '/gkz/hello',
-          {},
-          JSON.stringify({ 'name': this.name1})
-        );
-    localStorage.removeItem('vue');
-    localStorage.setItem('vue',JSON.stringify(num))
-    localStorage.setItem('name',this.name1);
-    this.name1='';
   
-      }else if(this.name2!=''){
-        this.stompClient.send(
-          '/gkz/hello',
-          {},
-          JSON.stringify({ 'name': this.name2})
-        );
-        localStorage.removeItem('vue');
-        localStorage.setItem('vue',JSON.stringify(num))
-        localStorage.setItem('name', this.name2);
-        this.name2='';
       }
-      this.vueGet = localStorage.getItem('vue');
-      this.greetingName=localStorage.getItem('name');
-      console.log(this.greetingName)
-      console.log(this.vueGet);
-      
-      if(this.vueGet==1){
-        // this.router.navigateByUrl('/vue1')
-         this.router.navigate(['/vue1'])
-       } if(this.vueGet==2){
-        // this.router.navigateByUrl('/vue2')
-         this.router.navigate(['/vue2'])
-       } if(this.vueGet==3){
-        // this.router.navigateByUrl('/vue3')
-         this.router.navigate(['/vue3'])
-       }
-  
+       this.router.navigate(['/vue1']);
     }
+    sendName2(num:number) { 
+      if(this.name!=''){
+          this.stompClient.send(
+            '/gkz/hello2',
+            {},
+      JSON.stringify({ 'name': this.name})
+          );
+    
+        }
+        this.router.navigate(['/vue2']);     
+      }
 
-
+      showGreeting(namevue: any){
+        localStorage.setItem('namvue',namevue);
+      }
 
 
 }

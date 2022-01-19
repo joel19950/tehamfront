@@ -11,13 +11,13 @@
 </head>
 
 <body>
-  <div style="color: blue; text-align: center">
+   <div style="color: blue; text-align: center">
     <h1>{{title}}</h1>
     <h3>{{description}}</h3>
   </div>
 
-  <div class="container" style="width: 400px; margin-top: 20px;">
-<!-- formulaire pour la connection a notre API d'echange -->
+<!--  <div class="container" style="width: 400px; margin-top: 20px;">
+
 <form class="form-inline">
   <div class="form-group">
     <label for="connect">Make Connection:</label>
@@ -27,7 +27,7 @@
 </form>
 <div *ngIf="vueGet==1"> 
   <h2 style="text-align: center;"> Vue 1 </h2>
-  <!-- formulaire pour la  gestion des vues  -->
+
   <form id="myForm" class="form-inline" style="margin-top: 20px;">
     <div class="form-group">
       <label for="name">User's Name1 <b style="color: red;"> {{greetingName}}</b> :</label>
@@ -38,7 +38,7 @@
   
   </form>
   
-  <!--<table id="conversation" class="table table-striped" style="margin-top: 20px;">
+  <table id="conversation" class="table table-striped" style="margin-top: 20px;">
     <thead>
       <tr>
         <th>Greetings</th>
@@ -49,12 +49,12 @@
         <td>{{greeting}}</td>
       </tr>
     </tbody>
-  </table> -->
+  </table> 
   </div>
 
   <div *ngIf="vueGet==2">
     <h2 style="text-align: center;"> Vue 2 </h2>
-    <!-- formulaire pour la  gestion des vues  -->
+     formulaire pour la  gestion des vues  
     <form class="form-inline" style="margin-top: 20px;">
       <div class="form-group">
         <label for="name">User's Name 2 <b style="color: red;"> {{ greetingName }}</b>:</label>
@@ -65,7 +65,7 @@
     
     </form>
     
-    <!-- <table id="conversation" class="table table-striped" style="margin-top: 20px;">
+     <table id="conversation" class="table table-striped" style="margin-top: 20px;">
       <thead>
         <tr>
           <th>Greetings</th>
@@ -76,14 +76,13 @@
           <td>{{greeting}}</td>
         </tr>
       </tbody>
-    </table> -->
+    </table> 
   
   </div>
 
   <div *ngIf="vueGet==3">
     
     <h2 style="text-align: center;"> Vue 3 </h2>
-    <!-- formulaire pour la  gestion des vues  -->
     <form class="form-inline"  style="margin-top: 20px;">
       <div class="form-group">
         <label for="name">User's Name 3 <b style="color: red;"> {{ greetingName }}</b> :</label>
@@ -94,7 +93,7 @@
     
     </form>
     
-    <!-- <table id="conversation" class="table table-striped" style="margin-top: 20px;">
+     <table id="conversation" class="table table-striped" style="margin-top: 20px;">
       <thead>
         <tr>
           <th>Greetings</th>
@@ -105,10 +104,11 @@
           <td>{{greeting}}</td>
         </tr>
       </tbody>
-    </table> -->
+    </table> 
   
   </div>
-</div>
-</body>
+</div> -->
+
 <router-outlet></router-outlet>
+</body>
 </html>

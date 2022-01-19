@@ -26,11 +26,9 @@ export class AppComponent {
   vueGet:any=1;
 
 greetingName:any='';
-   //stockage de la vue dans la session du navigateur
- // vuGet = localStorage.getItem('vue');
   constructor( public router:Router) { }
 
-  setConnected(connected: boolean) {
+  /*setConnected(connected: boolean) {
     this.disabled = !connected;
 
     if (connected) {
@@ -47,8 +45,7 @@ greetingName:any='';
       _this.setConnected(true);
       console.log('Connected: ' + frame);
 
-      _this.stompClient.subscribe('/topic/hi', function(hello:any) {
-
+      _this.stompClient.subscribe('/topic/h1', function(hello:any) {
         _this.showGreeting(JSON.parse(hello.body).greeting);
         
                
@@ -71,7 +68,7 @@ greetingName:any='';
 sendName(num:number) { 
   if(this.name!=''){
       this.stompClient.send(
-        '/gkz/hello',
+        '/gkz/hello1',
         {},
   JSON.stringify({ 'name': this.name})
       );
@@ -83,7 +80,7 @@ sendName(num:number) {
   
     }else if(this.name1!=''){
       this.stompClient.send(
-        '/gkz/hello',
+        '/gkz/hello1',
         {},
         JSON.stringify({ 'name': this.name1})
       );
@@ -94,7 +91,7 @@ sendName(num:number) {
 
     }else if(this.name2!=''){
       this.stompClient.send(
-        '/gkz/hello',
+        '/gkz/hello1',
         {},
         JSON.stringify({ 'name': this.name2})
       );
@@ -124,7 +121,7 @@ sendName(num:number) {
     this.greetings.push(message);
   }
 
-
+*/
 
 
 
